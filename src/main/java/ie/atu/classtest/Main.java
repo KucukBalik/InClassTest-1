@@ -18,7 +18,7 @@ public class Main {
 
         ArrayList<Order> orderObjects = new ArrayList<Order>();
 
-        Order newORDER = new Order("Null", "Null", "Null", 0);
+        Order newObject = new Order("Null", "Null", "Null", 0);
 
         orderObjects.add(new Order("001", "Jake", "Laptop", 4));
         orderObjects.add(new Order("002", "John", "Keyboard", 3));
@@ -35,11 +35,20 @@ public class Main {
             case"1":
                 System.out.println("Please enter the OrderID");
                 String ID = myScan.nextLine();
-                while(ID == object1.getOrderId() || ID == object2.getOrderId() || ID == object3.getOrderId())
-                {
+                try {
+                    if (ID == object1.getOrderId() || ID == object2.getOrderId() || ID == object3.getOrderId())
+                    {
+                        throw new IllegalArgumentException("Invalid objectID , entered ID should be valid!");
+                    }
                     System.out.println("Please enter a unique OrderID");
                     ID = myScan.nextLine();
                 }
+                catch (IllegalArgumentException iae)
+                {
+                    System.out.println("ERROR: " + iae.getMessage());
+                }
+
+
                 System.out.println("Please enter the Customer Name");
                 String Cus = myScan.nextLine();
                 System.out.println("Please enter the Product Name");
@@ -47,14 +56,14 @@ public class Main {
                 System.out.println("Please enter the Quantity");
                 int Qua = myScan.nextInt();
 
-                newORDER = new Order(ID, Cus, Pro, Qua);
+                newObject = new Order(ID, Cus, Pro, Qua);
 
-                orderObjects.add(newORDER);
+                orderObjects.add(newObject);
 
                 getDetails(object1);
                 getDetails(object2);
                 getDetails(object3);
-                getDetails(newORDER);
+                getDetails(newObject);
                 break;
 
             case"2":
@@ -62,7 +71,7 @@ public class Main {
                     ID = myScan.nextLine();
 
                 System.out.println("Please enter the new ORDER ID");
-                    ID = myScan.nextLine();
+                    String uID = myScan.nextLine();
 
                 System.out.println("Please enter the new Customer Name");
                     Cus = myScan.nextLine();
@@ -73,7 +82,26 @@ public class Main {
                 System.out.println("Please enter the new Quantity");
                     Qua = myScan.nextInt();
 
+                Order updatedObject = new Order(uID, Cus, Pro, Qua);
 
+                if(ID == object1.getOrderId())
+                {
+                    getDetails(updatedObject);
+                    getDetails(object2);
+                    getDetails(object3);
+                }
+                if(ID == object2.getOrderId())
+                {
+                    getDetails(object1);
+                    getDetails(updatedObject);
+                    getDetails(object3);
+                }
+                if(ID == object3.getOrderId())
+                {
+                    getDetails(object1);
+                    getDetails(object2);
+                    getDetails(updatedObject);
+                }
                 break;
 
             case"3":
@@ -81,7 +109,7 @@ public class Main {
                 getDetails(object1);
                 getDetails(object2);
                 getDetails(object3);
-                getDetails(newORDER);
+                getDetails(newObject);
                 break;
 
             case"4":
