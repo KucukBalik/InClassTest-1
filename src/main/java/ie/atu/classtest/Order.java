@@ -7,6 +7,15 @@ public class Order {
     private String productName;
     private int quantity;
 
+    public Order() {
+
+        this.orderId = null;
+        this.customerName = null;
+        this.productName = null;
+        this.quantity = 0;
+
+    }
+
     public Order(String orderId, String customerName, String productName, int quantity) {
         this.orderId = orderId;
         this.customerName = customerName;
@@ -45,4 +54,6 @@ public class Order {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
 }
